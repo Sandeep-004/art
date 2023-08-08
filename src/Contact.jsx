@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import ContactImg from './Images/contactt.png';
 import Social from "./Social";
 
 
 const Contact = () => {
+
+  const [FormData, setFormData] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const from = e.target;
+    fetch('/', {
+      method: 'POST',
+      body: new FormData(form),
+    });
+  };
+
     return (
         <>
           <div className="row contactRow">
@@ -13,7 +25,7 @@ const Contact = () => {
                 className="contactImg" src={ContactImg} alt="contact" />
               </div>
               <div className="col-6 formDetails">
-              <form className="contactForm">
+              <form className="contactForm" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"> 
                 <div className="contactH2"><h2>Get in touch</h2>
                 <small className="form-text text-muted smallHead">Want to get in touch?
               We'd would love to hear from you. Here's how you can reach us...</small><br />
@@ -39,7 +51,7 @@ const Contact = () => {
                 <label for="exampleFormControlFile1" className="labelForm">Select a photo</label>
                   <input type="file" className="form-control-file" id="exampleFormControlFile1" />
               </div>
-                <button style={{backgroundColor:'#224B0C'}} type="submit" className="btn btn-success submit">Submit</button>
+                <button style={{backgroundColor:'#224B0C'}} type="submit" className="btn btn-success submit" onClick={handleSubmit}>Submit</button>
             </form>
             <div className="contactSocial">
               <Social style={{color: '#224B0C'}} />
